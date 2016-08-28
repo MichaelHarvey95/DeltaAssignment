@@ -1,3 +1,8 @@
+// Author: Martin Redmond
+// Desc.: Main Page GUI Delta Healthcare
+// Date: Aug. 2016
+
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -56,7 +61,7 @@ public class TestHealthForm extends JFrame {
 	 */
 	public TestHealthForm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 998, 456);
+		setBounds(100, 100, 998, 508);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -116,9 +121,14 @@ public class TestHealthForm extends JFrame {
 		comboBox.setBounds(42, 305, 122, 20);
 		contentPane.add(comboBox);
 		
-		btnConfirm = new JButton("Confirm");
+		btnConfirm = new JButton("Submit");
+		btnConfirm.setForeground(Color.BLUE);
+		btnConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnConfirm.setFont(new Font("Courier New", Font.BOLD | Font.ITALIC, 12));
-		btnConfirm.setBounds(856, 357, 89, 23);
+		btnConfirm.setBounds(868, 435, 89, 23);
 		contentPane.add(btnConfirm);
 		
 		JTextArea txtrWelcomeToDelta = new JTextArea();
@@ -257,5 +267,11 @@ public class TestHealthForm extends JFrame {
 		JRadioButton radioButton_3 = new JRadioButton("no");
 		radioButton_3.setBounds(785, 323, 46, 22);
 		contentPane.add(radioButton_3);
+		
+		JButton btnAdminLogin = new JButton("Admin Login");
+		btnAdminLogin.setBackground(Color.PINK);
+		btnAdminLogin.setFont(new Font("Courier New", Font.BOLD | Font.ITALIC, 12));
+		btnAdminLogin.setBounds(42, 435, 122, 23);
+		contentPane.add(btnAdminLogin);
 	}
 }
