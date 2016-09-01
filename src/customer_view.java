@@ -1,6 +1,3 @@
-
- 
- 
  import java.awt.BorderLayout;
  import java.awt.EventQueue;
  
@@ -10,7 +7,7 @@
  import javax.swing.JLabel;
  import javax.swing.JTextPane;
  import javax.swing.JTextField;
- import com.jgoodies.forms.factories.DefaultComponentFactory;
+ //import com.jgoodies.forms.factories.DefaultComponentFactory;
  import java.awt.Color;
  import java.awt.Font;
  import java.awt.SystemColor;

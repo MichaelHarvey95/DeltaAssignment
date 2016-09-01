@@ -1,5 +1,11 @@
+//Author: Michael Harvey, L00102447
+//Desc: Login application for the admin.
+//Date: August 2016
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,7 +23,7 @@ public class Login extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String [] args){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -31,7 +37,7 @@ public class Login extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the frame and username and password cannot be null. Must contain correct characters.
 	 */
 	public Login() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,6 +72,18 @@ public class Login extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(306, 194, 89, 23);
 		contentPane.add(btnBack);
+		
+		btnBack.addActionListener(new ActionListener()
+		{
+			/**
+			 * Application must return to the main form when back button is clicked.
+			 */
+			public void actionPerformed(ActionEvent e)
+			{
+				TestHealthForm thf = new TestHealthForm();
+				thf.main(null);
+			}
+		});
 	}
 }
 
