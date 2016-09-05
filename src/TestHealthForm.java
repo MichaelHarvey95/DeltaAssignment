@@ -2,25 +2,52 @@
 // Desc.: Main Page GUI Delta Healthcare
 // Date: Aug. 2016
 
+
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 
 public class TestHealthForm extends JFrame{ 
 
+	customer_view custview = new customer_view();
 	private JPanel contentPane;
 	private JTextField txtFirstName;
 	private JTextField txtSurname;
 	private JTextField txtAddressLine;
-	private JTextField txtAddressLine_1;
 	private JTextField txtTown;
-	private JTextField txtPostCode;
 	private JButton btnConfirm;
 	private JTextField txtYourEmailAddress;
 	private JTextField txtYourContactNumber;
-
+	JComboBox<String> comboBox = new JComboBox<String>();
+	JRadioButton rdbtnNewRadioButton = new JRadioButton("Male");
+	JRadioButton rdbtnFemale = new JRadioButton("Female");
+	String Gender, answer;
+	JTextField txtAge = new JTextField();
+	JComboBox<String> comboBox_6 = new JComboBox<String>();
+	JComboBox<String> comboBox_4 = new JComboBox<String>();
+	
+	//String Text = txtAge.getText().trim();
+	//int a = Integer.parseInt(txtAge.getText()); 
+	
+	/*JComboBox<String> comboBox_1 = new JComboBox<String>();
+	JComboBox<String> comboBox_2 = new JComboBox<String>();
+	JComboBox<String> comboBox_3 = new JComboBox<String>();
+	String day=(String)comboBox_1.getSelectedItem();
+    String month=(String)comboBox_2.getSelectedItem();
+    String year=(String)comboBox_3.getSelectedItem();
+    String dob = year+"-"+month+"-"+day;
+    */
+    
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +64,27 @@ public class TestHealthForm extends JFrame{
 			}
 		});
 	}
+	
+	public void insert()
+	{
+		try{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
+		
+		
+		String query = ("INSERT INTO person(First_Name,Last_Name,Address,Town,County,Gender,Email,Phone_No,DOB,Dependants,Number_of_dependants,Health)"
+		+ "VALUES('"+txtFirstName.getText()+"','"+txtSurname.getText()+"','"+txtAddressLine.getText()+"','"+txtTown.getText()+"','"+comboBox.getSelectedItem().toString()+"','"+Gender+"','"+txtYourEmailAddress.getText()+"','"+txtYourContactNumber.getText()+"','"+txtAge.getText()+"','"+answer+"','"+comboBox_6.getSelectedItem().toString()+"','"+comboBox_4.getSelectedItem().toString()+"')");
+		PreparedStatement statement = con.prepareStatement(query);
+		statement.execute();
+		statement.close();
+		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+	}
 
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -75,13 +122,6 @@ public class TestHealthForm extends JFrame{
 		contentPane.add(txtAddressLine);
 		txtAddressLine.setColumns(10);
 		
-		txtAddressLine_1 = new JTextField();
-		txtAddressLine_1.setForeground(new Color(112, 128, 144));
-		txtAddressLine_1.setText("Address line 2");
-		txtAddressLine_1.setBounds(42, 243, 122, 20);
-		contentPane.add(txtAddressLine_1);
-		txtAddressLine_1.setColumns(10);
-		
 		txtTown = new JTextField();
 		txtTown.setForeground(new Color(112, 128, 144));
 		txtTown.setText("Town");
@@ -89,14 +129,7 @@ public class TestHealthForm extends JFrame{
 		contentPane.add(txtTown);
 		txtTown.setColumns(10);
 		
-		txtPostCode = new JTextField();
-		txtPostCode.setForeground(new Color(112, 128, 144));
-		txtPostCode.setText("Post code");
-		txtPostCode.setBounds(42, 336, 122, 20);
-		contentPane.add(txtPostCode);
-		txtPostCode.setColumns(10);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setForeground(new Color(169, 169, 169));
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"County", "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", "Donegal", "Down", "Dublin", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow"}));
 		comboBox.setToolTipText("Select County");
@@ -106,7 +139,14 @@ public class TestHealthForm extends JFrame{
 		btnConfirm = new JButton("Submit");
 		btnConfirm.setForeground(Color.BLUE);
 		btnConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					insert();
+					custview.main(null);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnConfirm.setFont(new Font("Courier New", Font.BOLD | Font.ITALIC, 12));
@@ -130,64 +170,15 @@ public class TestHealthForm extends JFrame{
  		title.setBounds(369, 11, 243, 30);
  		contentPane.add(title);
 	
-		
- 		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		comboBox_1.setForeground(new Color(169, 169, 169));
-		comboBox_1.setModel(new DefaultComboBoxModel<String>(new String[] {"YYYY", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900"}));
-		comboBox_1.setBounds(429, 212, 75, 20);
-		contentPane.add(comboBox_1);
-		
-		JComboBox<String> comboBox_2 = new JComboBox<String>();
-		comboBox_2.setForeground(new Color(169, 169, 169));
-		comboBox_2.setModel(new DefaultComboBoxModel<String>(new String[] {"MMM", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}));
-		comboBox_2.setBounds(356, 212, 63, 20);
-		contentPane.add(comboBox_2);
-		
-		JComboBox<String> comboBox_3 = new JComboBox<String>();
-		comboBox_3.setForeground(new Color(169, 169, 169));
-		comboBox_3.setModel(new DefaultComboBoxModel<String>(new String[] {"DD", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		comboBox_3.setBounds(300, 212, 46, 20);
-		contentPane.add(comboBox_3);
-		
-		JLabel lblPleaseTickAs = new JLabel("Please tick as appropriate:");
-		lblPleaseTickAs.setBounds(607, 346, 164, 14);
-		contentPane.add(lblPleaseTickAs);
-		
-		JLabel lblDoYouSmoke = new JLabel("Do you smoke?");
-		lblDoYouSmoke.setBounds(607, 370, 105, 14);
-		contentPane.add(lblDoYouSmoke);
-		
-		JLabel lblDrinkAlcohol = new JLabel("Drink alcohol?");
-		lblDrinkAlcohol.setBounds(607, 401, 105, 14);
-		contentPane.add(lblDrinkAlcohol);
-		
+			
 		JLabel lblHaveYou = new JLabel("Do you suffer from any of the following? ");
 		lblHaveYou.setBounds(607, 122, 338, 14);
 		contentPane.add(lblHaveYou);
 		
-		JComboBox<String> comboBox_4 = new JComboBox<String>();
+		
 		comboBox_4.setModel(new DefaultComboBoxModel<String>(new String[] {"Aging Eye (including cataracts, glaucoma and macular degeneration)", "Allergy", "Alzheimer\u2019s and Other Dementias", "Anemia", "Anxiety Disorders (including Panic Attacks and Phobias)", "Arthritis, (including Osteoarthritis and Rheumatoid Arthritis)", "Asthma", "Blood Pressure (Hypertension)", "Breast Health and Disease (including Breast Cancer)", "Bursitis and Tendonitis", "Cholesterol", "Colds and Flu", "Colon Health and Disease (including Colon Cancer)", "Depression", "Diabetes", "Digestive Disorders", "Fatigue and Low Energy", "Foot Problems and Foot Care", "Grief and Loss", "Headache", "Hearing Loss", "Kidney Disease", "Lung Diseases (including COPD)", "Memory Loss", "Menopause", "Osteoporosis", "Pain, Back", "Pain, Generalized", "Pain, Hand", "Pain, Hip", "Pain, Knee", "Pain, Neck", "Parkinson\u2019s Disease", "Pregnancy", "Prostate Health and Disease (including Prostate Cancer)", "Skin Hair and Nails", "Sleep Disorders Adults", "Stress", "Stroke", "Thyroid Disorders", "Urine and Bladder Problems"}));
 		comboBox_4.setBounds(607, 147, 338, 20);
 		contentPane.add(comboBox_4);
-		
-		JRadioButton Y = new JRadioButton("yes");
-		Y.setBounds(607, 181, 46, 23);
-		contentPane.add(Y);
-		
-		JRadioButton N = new JRadioButton("no");
-		N.setBounds(671, 181, 46, 22);
-		contentPane.add(N);
-		ButtonGroup selCon = new ButtonGroup();
-		selCon.add(N);
-		selCon.add(Y);
-		
-		JLabel lblPleaseGiveDetails = new JLabel("Please give details in the space provided...");
-		lblPleaseGiveDetails.setBounds(607, 215, 321, 14);
-		contentPane.add(lblPleaseGiveDetails);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(609, 241, 319, 56);
-		contentPane.add(textArea);
 		
 		txtYourEmailAddress = new JTextField();
 		txtYourEmailAddress.setForeground(new Color(169, 169, 169));
@@ -204,31 +195,37 @@ public class TestHealthForm extends JFrame{
 		contentPane.add(txtYourContactNumber);
 		txtYourContactNumber.setColumns(10);
 		
-		JLabel lblDateOfBirth = new JLabel("Date of birth:");
-		lblDateOfBirth.setBounds(204, 213, 366, 14);
-		contentPane.add(lblDateOfBirth);
-		
-		JComboBox<String> comboBox_5 = new JComboBox<String>();
-		comboBox_5.setBackground(new Color(255, 255, 255));
-		comboBox_5.setForeground(new Color(169, 169, 169));
-		comboBox_5.setModel((ComboBoxModel<String>) new DefaultComboBoxModel<String>(new String[] {"Title", "Dr", "Mr", "Mrs", "Miss", "Prof"}));
-		comboBox_5.setBounds(42, 126, 57, 20);
-		contentPane.add(comboBox_5);
-		
+		txtAge.setForeground(new Color(169, 169, 169));
+		txtAge.setBounds(244, 229, 125, 17);
+		txtAge.setText("Age");
+		contentPane.add(txtAge);
+				
 		JLabel lblGender_1 = new JLabel("Gender:");
 		lblGender_1.setBounds(204, 122, 46, 14);
 		contentPane.add(lblGender_1);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Male");
 		rdbtnNewRadioButton.setBounds(280, 118, 89, 23);
 		contentPane.add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.addActionListener(new ActionListener()
+		{						
+			public void actionPerformed(ActionEvent e) {
+				Gender = "Male";
+		}
+		});
 		
-		JRadioButton rdbtnFemale = new JRadioButton("Female");
+		
+		
 		rdbtnFemale.setBounds(382, 118, 122, 23);
 		contentPane.add(rdbtnFemale);
 		ButtonGroup selGender = new ButtonGroup();
 		selGender.add(rdbtnNewRadioButton);
 		selGender.add(rdbtnFemale);
+		rdbtnFemale.addActionListener(new ActionListener()
+		{						
+			public void actionPerformed(ActionEvent e) {
+			Gender = "Female";
+		}
+		});
 		
 		JLabel lblWouldYouLike = new JLabel("Include some dependants?");
 		lblWouldYouLike.setBounds(204, 275, 165, 14);
@@ -237,10 +234,22 @@ public class TestHealthForm extends JFrame{
 		JRadioButton rdbtnYes = new JRadioButton("yes");
 		rdbtnYes.setBounds(382, 273, 46, 23);
 		contentPane.add(rdbtnYes);
+		rdbtnYes.addActionListener(new ActionListener()
+		{						
+			public void actionPerformed(ActionEvent e) {
+				answer = "yes";
+		}
+		});
 		
 		JRadioButton rdbtnNo = new JRadioButton("no");
 		rdbtnNo.setBounds(458, 273, 46, 22);
 		contentPane.add(rdbtnNo);
+		rdbtnNo.addActionListener(new ActionListener()
+		{						
+			public void actionPerformed(ActionEvent e) {
+				answer = "no";
+		}
+		});
 		ButtonGroup selDep = new ButtonGroup();
 		selDep.add(rdbtnNo);
 		selDep.add(rdbtnYes);
@@ -249,32 +258,10 @@ public class TestHealthForm extends JFrame{
 		lblPleaseSelectNo.setBounds(204, 311, 215, 14);
 		contentPane.add(lblPleaseSelectNo);
 		
-		JComboBox<String> comboBox_6 = new JComboBox<String>();
-		comboBox_6.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		
+		comboBox_6.setModel(new DefaultComboBoxModel<String>(new String[] {"0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboBox_6.setBounds(460, 305, 46, 20);
 		contentPane.add(comboBox_6);
-		
-		JRadioButton radioButton = new JRadioButton("yes");
-		radioButton.setBounds(718, 361, 46, 23);
-		contentPane.add(radioButton);
-		
-		JRadioButton radioButton_1 = new JRadioButton("no");
-		radioButton_1.setBounds(782, 361, 46, 22);
-		contentPane.add(radioButton_1);
-		ButtonGroup selS = new ButtonGroup();
-		selS.add(radioButton);
-		selS.add(radioButton_1);
-      
-		JRadioButton radioButton_2 = new JRadioButton("yes");
-		radioButton_2.setBounds(721, 392, 46, 23);
-		contentPane.add(radioButton_2);
-		
-		JRadioButton radioButton_3 = new JRadioButton("no");
-		radioButton_3.setBounds(785, 392, 46, 22);
-		contentPane.add(radioButton_3);
-		ButtonGroup selD = new ButtonGroup();
-		selD.add(radioButton_2);
-		selD.add(radioButton_3);
 		
 		JButton btnAdminLogin = new JButton("Admin Login");
 		btnAdminLogin.setBackground(Color.PINK);
@@ -288,7 +275,10 @@ public class TestHealthForm extends JFrame{
 				lgin.main(null);
 		}
 		});
+		
 	}
+	
+	
 }
 
 
