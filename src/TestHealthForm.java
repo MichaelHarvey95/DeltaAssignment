@@ -51,7 +51,6 @@ public class TestHealthForm extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -68,13 +67,82 @@ public class TestHealthForm extends JFrame{
 	public void insert()
 	{
 		try{
+		
+		double price = 0.0;
+		
+		if(comboBox_6.getSelectedItem().toString() == "1")
+		{
+			price += 500.0;
+		}
+		else if(comboBox_6.getSelectedItem().toString() == "2")
+		{
+			price += 400.0;
+		}
+		else if(comboBox_6.getSelectedItem().toString() == "3")
+		{
+			price += 300.0;
+		}
+		else if(comboBox_6.getSelectedItem().toString() == "4")
+		{
+			price += 200.0;
+		}
+		else if(comboBox_6.getSelectedItem().toString() == "5")
+		{
+			price += 100.0;
+		}
+		
+		if(comboBox_4.getSelectedItem().toString() == "Aging Eye (including cataracts, glaucoma and macular degeneration)")
+		{
+			price += 45.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Allergy")
+		{
+			price += 35.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Alzheimer\u2019s and Other Dementias")
+		{
+			price += 35.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Anemia")
+		{
+			price += 35.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Anxiety Disorders (including Panic Attacks and Phobias)")
+		{
+			price += 55.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Arthritis, (including Osteoarthritis and Rheumatoid Arthritis)")
+		{
+			price += 65.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Asthma" )
+		{
+			price += 55.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Blood Pressure (Hypertension)")
+		{
+			price += 45.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Breast Health and Disease (including Breast Cancer)")
+		{
+			price += 55.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Bursitis and Tendonitis")
+		{
+			price += 45.0;
+		}
+		else if(comboBox_4.getSelectedItem().toString() == "Cholesterol")
+		{
+			price += 55.0;
+		}
+				
+		JOptionPane.showMessageDialog(null, ("Your quote is " + price),
+		"Your quote", JOptionPane.INFORMATION_MESSAGE);
+		
 		Class.forName("com.mysql.jdbc.Driver");
-		
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
-		
-		
-		String query = ("INSERT INTO person(First_Name,Last_Name,Address,Town,County,Gender,Email,Phone_No,DOB,Dependants,Number_of_dependants,Health)"
-		+ "VALUES('"+txtFirstName.getText()+"','"+txtSurname.getText()+"','"+txtAddressLine.getText()+"','"+txtTown.getText()+"','"+comboBox.getSelectedItem().toString()+"','"+Gender+"','"+txtYourEmailAddress.getText()+"','"+txtYourContactNumber.getText()+"','"+txtAge.getText()+"','"+answer+"','"+comboBox_6.getSelectedItem().toString()+"','"+comboBox_4.getSelectedItem().toString()+"')");
+		String query = ("INSERT INTO person(First_Name,Last_Name,Address,Town,County,Gender,Email,Phone_No,DOB,Dependants,Number_of_dependants,Health,Quote_Price)"
+		+ "VALUES('"+txtFirstName.getText()+"','"+txtSurname.getText()+"','"+txtAddressLine.getText()+"','"+txtTown.getText()+"','"+comboBox.getSelectedItem().toString()+"','"+Gender+"','"+txtYourEmailAddress.getText()+"','"+txtYourContactNumber.getText()+"','"+txtAge.getText()+"','"+answer+"','"+comboBox_6.getSelectedItem().toString()+"','"+comboBox_4.getSelectedItem().toString()+"','"+price+"')");
 		PreparedStatement statement = con.prepareStatement(query);
 		statement.execute();
 		statement.close();
@@ -176,7 +244,7 @@ public class TestHealthForm extends JFrame{
 		contentPane.add(lblHaveYou);
 		
 		
-		comboBox_4.setModel(new DefaultComboBoxModel<String>(new String[] {"Aging Eye (including cataracts, glaucoma and macular degeneration)", "Allergy", "Alzheimer\u2019s and Other Dementias", "Anemia", "Anxiety Disorders (including Panic Attacks and Phobias)", "Arthritis, (including Osteoarthritis and Rheumatoid Arthritis)", "Asthma", "Blood Pressure (Hypertension)", "Breast Health and Disease (including Breast Cancer)", "Bursitis and Tendonitis", "Cholesterol", "Colds and Flu", "Colon Health and Disease (including Colon Cancer)", "Depression", "Diabetes", "Digestive Disorders", "Fatigue and Low Energy", "Foot Problems and Foot Care", "Grief and Loss", "Headache", "Hearing Loss", "Kidney Disease", "Lung Diseases (including COPD)", "Memory Loss", "Menopause", "Osteoporosis", "Pain, Back", "Pain, Generalized", "Pain, Hand", "Pain, Hip", "Pain, Knee", "Pain, Neck", "Parkinson\u2019s Disease", "Pregnancy", "Prostate Health and Disease (including Prostate Cancer)", "Skin Hair and Nails", "Sleep Disorders Adults", "Stress", "Stroke", "Thyroid Disorders", "Urine and Bladder Problems"}));
+		comboBox_4.setModel(new DefaultComboBoxModel<String>(new String[] {"Aging Eye (including cataracts, glaucoma and macular degeneration)", "Allergy", "Alzheimer\u2019s and Other Dementias", "Anemia", "Anxiety Disorders (including Panic Attacks and Phobias)", "Arthritis, (including Osteoarthritis and Rheumatoid Arthritis)", "Asthma", "Blood Pressure (Hypertension)", "Breast Health and Disease (including Breast Cancer)", "Bursitis and Tendonitis", "Cholesterol"}));
 		comboBox_4.setBounds(607, 147, 338, 20);
 		contentPane.add(comboBox_4);
 		
@@ -259,7 +327,7 @@ public class TestHealthForm extends JFrame{
 		contentPane.add(lblPleaseSelectNo);
 		
 		
-		comboBox_6.setModel(new DefaultComboBoxModel<String>(new String[] {"0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox_6.setModel(new DefaultComboBoxModel<String>(new String[] {"0","1", "2", "3", "4", "5"}));
 		comboBox_6.setBounds(460, 305, 46, 20);
 		contentPane.add(comboBox_6);
 		

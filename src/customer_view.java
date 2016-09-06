@@ -40,6 +40,7 @@ import java.sql.Statement;
 	 	private JTextField textField_9;
 	 	private JTextField textField_10;
 	 	private JTextField textField_11;
+	 	private JTextField textField_12;
 		/**
 	 	 * Launch the application.
 	 	 */
@@ -55,54 +56,7 @@ import java.sql.Statement;
 	 			}
 	 		});
 		}
-	 	
-		public void view()
-		{
-			try{
-			String un = textField.getText();
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
-			PreparedStatement stmt = con.prepareStatement("SELECT First_Name FROM person");
-			stmt.setString(1, un);
-			ResultSet rs = stmt.executeQuery();
-			while(rs.next())
-			{
-				textField.setText(rs.getString("First_Name"));
-			}
-			/*String fn = rs.getString("First_Name");
-			textField.setText(fn);
-			String ln = rs.getString("Last_Name");
-			textField_1.setText(ln);*/
-			/*String add = rs.getString("Address");
-			textField_2.setText(add);
-			String twn = rs.getString("Town");
-			textField_3.setText(twn);
-			String County = rs.getString("County");
-			textField_4.setText(County);
-			String gndr = rs.getString("Gender");
-			textField_5.setText(gndr);
-			String eml = rs.getString("Email");
-			textField_6.setText(eml);
-			String phNo = rs.getString("Phone_No");
-			textField_7.setText(phNo);
-			String dob = rs.getString("DOB");
-			textField_8.setText(dob);
-			String depen = rs.getString("Dependants");
-			textField_9.setText(depen);
-			String noDepen = rs.getString("Number_of_dependants");
-			textField_10.setText(noDepen);
-			String hlth = rs.getString("Health");
-			textField_11.setText(hlth);
-			*/
-	        
-	        stmt.close();
-			
-			}
-			catch(Exception e){
-				JOptionPane.showMessageDialog(null, e);
-		}
 
-		}
 	 	/**
 		 * Create the frame.
 	  */
@@ -193,7 +147,7 @@ import java.sql.Statement;
 	 					String un = textField.getText();
 	 					Class.forName("com.mysql.jdbc.Driver");
 	 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
-	 					PreparedStatement stmt = con.prepareStatement("SELECT First_Name,Last_Name,Address,Town,County,Gender,Phone_No,DOB,Dependants,Number_of_dependants,Health FROM person where Email = ?");
+	 					PreparedStatement stmt = con.prepareStatement("SELECT First_Name,Last_Name,Address,Town,County,Gender,Phone_No,DOB,Dependants,Number_of_dependants,Health,Quote_Price FROM person where Email = ?");
 	 					stmt.setString(1, un);
 	 					ResultSet rs = stmt.executeQuery();
 	 					while(rs.next())
@@ -210,10 +164,11 @@ import java.sql.Statement;
 	 						textField_9.setText(rs.getString("Dependants"));
 	 						textField_10.setText(rs.getString("Number_of_dependants"));
 	 						textField_11.setText(rs.getString("Health"));
+	 						textField_12.setText(rs.getString("Quote_Price"));
 	 					}
 	 				}
 	 				catch(Exception e1){
-	 					e1.printStackTrace();
+	 					JOptionPane.showMessageDialog(btnView, "Error has occurred");
 	 				}
 	 			}
 	 		});
@@ -225,58 +180,79 @@ import java.sql.Statement;
 	 		
 	 		textField_1 = new JTextField();
 	 		textField_1.setBounds(239, 141, 174, 20);
+	 		textField_1.setEditable(false);
 	 		contentPane.add(textField_1);
 	 		textField_1.setColumns(10);
 	 		
 	 		textField_2 = new JTextField();
 	 		textField_2.setBounds(239, 181, 174, 20);
+	 		textField_2.setEditable(false);
 	 		contentPane.add(textField_2);
 	 		textField_2.setColumns(10);
 	 		
 	 		textField_3 = new JTextField();
 	 		textField_3.setBounds(239, 209, 174, 20);
+	 		textField_3.setEditable(false);
 	 		contentPane.add(textField_3);
 	 		textField_3.setColumns(10);
 	 		
 	 		textField_4 = new JTextField();
 	 		textField_4.setBounds(239, 245, 174, 20);
+	 		textField_4.setEditable(false);
 	 		contentPane.add(textField_4);
 	 		textField_4.setColumns(10);
 	 		
 	 		textField_5 = new JTextField();
 	 		textField_5.setBounds(239, 285, 174, 20);
+	 		textField_5.setEditable(false);
 	 		contentPane.add(textField_5);
 	 		textField_5.setColumns(10);
 	 		
 	 		textField_6 = new JTextField();
 	 		textField_6.setBounds(239, 326, 174, 20);
+	 		textField_6.setEditable(false);
 	 		contentPane.add(textField_6);
 	 		textField_6.setColumns(10);
 	 		
 	 		textField_7 = new JTextField();
 	 		textField_7.setBounds(239, 363, 174, 20);
+	 		textField_7.setEditable(false);
 	 		contentPane.add(textField_7);
 	 		textField_7.setColumns(10);
 	 		
 	 		textField_8 = new JTextField();
 	 		textField_8.setBounds(239, 406, 174, 20);
+	 		textField_8.setEditable(false);
 	 		contentPane.add(textField_8);
 	 		textField_8.setColumns(10);
 	 		
 	 		textField_9 = new JTextField();
 	 		textField_9.setBounds(239, 442, 174, 20);
+	 		textField_9.setEditable(false);
 	 		contentPane.add(textField_9);
 	 		textField_9.setColumns(10);
 	 		
 	 		textField_10 = new JTextField();
 	 		textField_10.setBounds(239, 483, 174, 20);
+	 		textField_10.setEditable(false);
 	 		contentPane.add(textField_10);
 	 		textField_10.setColumns(10);
 	 		
 	 		textField_11 = new JTextField();
 	 		textField_11.setBounds(239, 528, 174, 20);
+	 		textField_11.setEditable(false);
 	 		contentPane.add(textField_11);
 	 		textField_11.setColumns(10);
+	 		
+	 		JLabel lblYourQuote = new JLabel("Quote price: ");
+	 		lblYourQuote.setBounds(454, 95, 101, 23);
+	 		contentPane.add(lblYourQuote);
+	 		
+	 		textField_12 = new JTextField();
+	 		textField_12.setBounds(565, 96, 86, 20);
+	 		textField_12.setEditable(false);
+	 		contentPane.add(textField_12);
+	 		textField_12.setColumns(10);
 	 		
 	 		JButton btnBackToMain = new JButton("Back to Main Form");
 	 		btnBackToMain.setBounds(655, 527, 157, 23);
