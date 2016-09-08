@@ -146,7 +146,7 @@ import java.sql.Statement;
 	 				try{
 	 					String un = textField.getText();
 	 					Class.forName("com.mysql.jdbc.Driver");
-	 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
+	 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/deltaassignment","root","Buster*1");
 	 					PreparedStatement stmt = con.prepareStatement("SELECT First_Name,Last_Name,Address,Town,County,Gender,Phone_No,DOB,Dependants,Number_of_dependants,Health,Quote_Price FROM person where Email = ?");
 	 					stmt.setString(1, un);
 	 					ResultSet rs = stmt.executeQuery();

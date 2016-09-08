@@ -8,11 +8,6 @@ import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -161,7 +156,7 @@ public class TestHealthForm extends JFrame{
 		"Your quote", JOptionPane.INFORMATION_MESSAGE);
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/deltaassignment","root","Buster*1");
 		String query = ("INSERT INTO person(First_Name,Last_Name,Address,Town,County,Gender,Email,Phone_No,DOB,Dependants,Number_of_dependants,Health,Quote_Price)"
 		+ "VALUES('"+txtFirstName.getText()+"','"+txtSurname.getText()+"','"+txtAddressLine.getText()+"','"+txtTown.getText()+"','"+comboBox.getSelectedItem().toString()+"','"+Gender+"','"+txtYourEmailAddress.getText()+"','"+txtYourContactNumber.getText()+"','"+txtAge.getText()+"','"+answer+"','"+comboBox_6.getSelectedItem().toString()+"','"+comboBox_4.getSelectedItem().toString()+"','"+price+"')");
 		PreparedStatement statement = con.prepareStatement(query);
@@ -195,6 +190,19 @@ public class TestHealthForm extends JFrame{
 		txtFirstName.setCaretColor(Color.LIGHT_GRAY);
 		txtFirstName.setToolTipText("Type here");
 		txtFirstName.setText("First name");
+		txtFirstName.addFocusListener(new FocusListener() {
+
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		    	txtFirstName.setText(null); // Empty the text field when it receives focus
+		    }
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub// not used in this case
+				
+			}
+		});
 		txtFirstName.setBounds(42, 150, 122, 20);
 		contentPane.add(txtFirstName);
 		txtFirstName.setColumns(10);
@@ -202,6 +210,20 @@ public class TestHealthForm extends JFrame{
 		txtSurname = new JTextField();
 		txtSurname.setForeground(new Color(112, 128, 144));
 		txtSurname.setText("Surname");
+		txtSurname.addFocusListener(new FocusListener() {
+
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		    	txtSurname.setText(null); // Empty the text field when it receives focus
+		    }
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		txtSurname.setBounds(42, 181, 122, 20);
 		contentPane.add(txtSurname);
 		txtSurname.setColumns(10);
@@ -209,6 +231,20 @@ public class TestHealthForm extends JFrame{
 		txtAddressLine = new JTextField();
 		txtAddressLine.setForeground(new Color(112, 128, 144));
 		txtAddressLine.setText("Address line 1");
+		txtAddressLine.addFocusListener(new FocusListener() {
+
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		    	txtAddressLine.setText(null); // Empty the text field when it receives focus
+		    }
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		txtAddressLine.setBounds(42, 212, 122, 20);
 		contentPane.add(txtAddressLine);
 		txtAddressLine.setColumns(10);
@@ -216,12 +252,26 @@ public class TestHealthForm extends JFrame{
 		txtTown = new JTextField();
 		txtTown.setForeground(new Color(112, 128, 144));
 		txtTown.setText("Town");
+		txtTown.addFocusListener(new FocusListener() {
+
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		    	txtTown.setText(null); // Empty the text field when it receives focus
+		    }
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+		});
 		txtTown.setBounds(42, 274, 122, 20);
 		contentPane.add(txtTown);
 		txtTown.setColumns(10);
 		
 		
-		comboBox.setForeground(new Color(169, 169, 169));
+		//comboBox.setForeground(new Color(169, 169, 169));
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"County", "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", "Donegal", "Down", "Dublin", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow"}));
 		comboBox.setToolTipText("Select County");
 		comboBox.setBounds(42, 305, 122, 20);
@@ -274,6 +324,26 @@ public class TestHealthForm extends JFrame{
 		txtYourEmailAddress = new JTextField();
 		txtYourEmailAddress.setForeground(new Color(169, 169, 169));
 		txtYourEmailAddress.setDisabledTextColor(new Color(169, 169, 169));
+		txtYourEmailAddress.addFocusListener(new FocusListener() {
+
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		    	txtYourEmailAddress.setText(null); // Empty the text field when it receives focus
+		    }
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+
+
+		});
+		
+		
+		
+		
 		txtYourEmailAddress.setText("Your email address");
 		txtYourEmailAddress.setBounds(244, 150, 260, 20);
 		contentPane.add(txtYourEmailAddress);
@@ -283,12 +353,42 @@ public class TestHealthForm extends JFrame{
 		txtYourContactNumber.setForeground(new Color(169, 169, 169));
 		txtYourContactNumber.setText("Your contact number");
 		txtYourContactNumber.setBounds(244, 181, 260, 20);
+		
+		txtYourContactNumber.addFocusListener(new FocusListener() {
+
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		    	txtYourContactNumber.setText(null); // Empty the text field when it receives focus
+		    }
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 		contentPane.add(txtYourContactNumber);
 		txtYourContactNumber.setColumns(10);
 		
 		txtAge.setForeground(new Color(169, 169, 169));
 		txtAge.setBounds(244, 229, 125, 17);
 		txtAge.setText("Age");
+		txtAge.addFocusListener(new FocusListener() {
+
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		    	txtAge.setText(null); // Empty the text field when it receives focus
+		    }
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		contentPane.add(txtAge);
 				
 		JLabel lblGender_1 = new JLabel("Gender:");
