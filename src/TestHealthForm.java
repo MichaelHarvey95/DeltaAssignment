@@ -66,7 +66,28 @@ public class TestHealthForm extends JFrame{
 	
 	public void insert()
 	{
-		try{
+			try{
+				Integer.parseInt(String.valueOf(txtYourContactNumber.getText()));
+			}
+			catch(NumberFormatException nexc)
+			{
+				JOptionPane.showMessageDialog(null, ("Text entered in contact number field!! Please change this."),
+						"An error has occurred!!", JOptionPane.INFORMATION_MESSAGE);
+					return;
+			}
+						
+			try{
+				
+				Integer.parseInt(String.valueOf(txtAge.getText()));
+			}
+			catch(NumberFormatException exc ){
+				JOptionPane.showMessageDialog(null, ("Text entered in age field!! Please change this."),
+					"An error has occurred!!", JOptionPane.INFORMATION_MESSAGE);
+				return;
+	}
+	
+		
+	try{
 		
 		double price = 0.0;
 		
@@ -136,7 +157,7 @@ public class TestHealthForm extends JFrame{
 			price += 55.0;
 		}
 				
-		JOptionPane.showMessageDialog(null, ("Your quote is " + price),
+		JOptionPane.showMessageDialog(null, ("Your quote is " + price + " euro"),
 		"Your quote", JOptionPane.INFORMATION_MESSAGE);
 		
 		Class.forName("com.mysql.jdbc.Driver");
@@ -149,8 +170,10 @@ public class TestHealthForm extends JFrame{
 		
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, ("An error has occurred!!"),
+					"An error has occurred!!", JOptionPane.INFORMATION_MESSAGE);
 	}
+		
 
 	}
 	/**
@@ -210,7 +233,7 @@ public class TestHealthForm extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					insert();
-					custview.main(null);
+					//custview.main(null);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -341,6 +364,19 @@ public class TestHealthForm extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Login lgin = new Login();
 				lgin.main(null);
+		}
+		});
+		
+		JButton btnUserView = new JButton("User view");
+		btnUserView.setForeground(Color.BLUE);
+		btnUserView.setFont(new Font("Courier New", Font.BOLD | Font.ITALIC, 12));
+		btnUserView.setBounds(718, 434, 116, 23);
+		contentPane.add(btnUserView);
+		btnUserView.addActionListener(new ActionListener()
+		{						
+			public void actionPerformed(ActionEvent e) {
+				customer_view cview = new customer_view();
+				cview.main(null);
 		}
 		});
 		

@@ -6,11 +6,16 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -68,6 +73,41 @@ public class Login extends JFrame {
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setBounds(200, 194, 89, 23);
 		contentPane.add(btnSubmit);
+		btnSubmit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				try{
+					
+				
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
+					PreparedStatement ps = con.prepareStatement("SELECT * FROM Admin WHERE username = ? AND password = ?");
+					ps.setString(1, textField.getText());
+					ps.setString(2, textField_1.getText());
+					ResultSet result = ps.executeQuery();
+					
+					if(result.next())
+					{
+						JOptionPane.showMessageDialog(null, "Username and password correct");
+						Admin admn = new Admin();
+						admn.main(null);
+						
+					}
+					else 
+					{
+						JOptionPane.showMessageDialog(null, "Invalid login details");
+						
+					}
+					
+				}
+				catch(Exception e1){
+					JOptionPane.showMessageDialog(null, ("Incorrect login details!!"),
+							"An error has occurred!!", JOptionPane.INFORMATION_MESSAGE);
+
+				}
+			}
+		});
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(306, 194, 89, 23);

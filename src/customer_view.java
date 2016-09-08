@@ -81,7 +81,7 @@ import java.sql.Statement;
 	 		lblNewLabel.setBounds(24, 364, 101, 16);
 	 		contentPane.add(lblNewLabel);
 	 		
-	 		JLabel lblNewLabel_1 = new JLabel("Date of Birth:");
+	 		JLabel lblNewLabel_1 = new JLabel("Age:");
 	 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 	 		lblNewLabel_1.setBounds(24, 407, 90, 16);
 	 		contentPane.add(lblNewLabel_1);
@@ -152,7 +152,7 @@ import java.sql.Statement;
 	 					ResultSet rs = stmt.executeQuery();
 	 					while(rs.next())
 	 					{
-	 						//textField.setText(rs.getString("Email"));
+	 						
 	 						textField_1.setText(rs.getString("First_Name"));
 	 						textField_2.setText(rs.getString("Last_Name"));
 	 						textField_3.setText(rs.getString("Address"));
@@ -168,7 +168,8 @@ import java.sql.Statement;
 	 					}
 	 				}
 	 				catch(Exception e1){
-	 					JOptionPane.showMessageDialog(btnView, "Error has occurred");
+	 					JOptionPane.showMessageDialog(null, ("An error has occurred!!"),
+	 							"An error has occurred!!", JOptionPane.INFORMATION_MESSAGE);
 	 				}
 	 			}
 	 		});
@@ -260,7 +261,7 @@ import java.sql.Statement;
 	 		btnBackToMain.addActionListener(new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
+					dispose();
  					TestHealthForm thf = new TestHealthForm();
  					thf.main(null);	
 				}
