@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField password;
 
 	/**
 	 * Launch the application.
@@ -65,10 +66,10 @@ public class Login extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(200, 129, 140, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		password = new JPasswordField();
+		password.setBounds(200, 129, 140, 20);
+		contentPane.add(password);
+		password.setColumns(10);
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setBounds(200, 194, 89, 23);
@@ -84,12 +85,13 @@ public class Login extends JFrame {
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/deltaassignment","root","password");
 					PreparedStatement ps = con.prepareStatement("SELECT * FROM Admin WHERE username = ? AND password = ?");
 					ps.setString(1, textField.getText());
-					ps.setString(2, textField_1.getText());
+					ps.setString(2, password.getText());
 					ResultSet result = ps.executeQuery();
 					
 					if(result.next())
 					{
 						JOptionPane.showMessageDialog(null, "Username and password correct");
+						dispose();
 						Admin admn = new Admin();
 						admn.main(null);
 						
@@ -120,6 +122,7 @@ public class Login extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
+				dispose();
 				TestHealthForm thf = new TestHealthForm();
 				thf.main(null);
 			}

@@ -31,18 +31,7 @@ public class TestHealthForm extends JFrame{
 	JComboBox<String> comboBox_6 = new JComboBox<String>();
 	JComboBox<String> comboBox_4 = new JComboBox<String>();
 	
-	//String Text = txtAge.getText().trim();
-	//int a = Integer.parseInt(txtAge.getText()); 
-	
-	/*JComboBox<String> comboBox_1 = new JComboBox<String>();
-	JComboBox<String> comboBox_2 = new JComboBox<String>();
-	JComboBox<String> comboBox_3 = new JComboBox<String>();
-	String day=(String)comboBox_1.getSelectedItem();
-    String month=(String)comboBox_2.getSelectedItem();
-    String year=(String)comboBox_3.getSelectedItem();
-    String dob = year+"-"+month+"-"+day;
-    */
-    
+	   
 	/**
 	 * Launch the application.
 	 */
@@ -462,6 +451,7 @@ public class TestHealthForm extends JFrame{
 		btnAdminLogin.addActionListener(new ActionListener()
 		{						
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				Login lgin = new Login();
 				lgin.main(null);
 		}
@@ -475,6 +465,7 @@ public class TestHealthForm extends JFrame{
 		btnUserView.addActionListener(new ActionListener()
 		{						
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				customer_view cview = new customer_view();
 				cview.main(null);
 		}
