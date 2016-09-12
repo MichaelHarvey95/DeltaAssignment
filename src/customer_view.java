@@ -20,7 +20,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
  
- public class customer_view extends JFrame {
+/**
+ * @author rkaini bouchra
+ * @Date 12/09/2016
+ * @Discription the costumer view page 
+ */
+public class customer_view extends JFrame {
  
 	 private JPanel contentPane;
 	 	private JLabel lblNumberOfDependants;
@@ -43,6 +48,9 @@ import java.sql.Statement;
 	 	private JTextField textField_12;
 		/**
 	 	 * Launch the application.
+	 	 */
+	 	/**
+	 	 * @param args
 	 	 */
 	 	public static void main(String[] args) {
 	 		EventQueue.invokeLater(new Runnable() {
@@ -141,6 +149,9 @@ import java.sql.Statement;
 	 		contentPane.add(btnView);
 	 		btnView.addActionListener(new ActionListener()
 	 		{
+	 			/* (non-Javadoc)
+	 			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 			 */
 	 			public void actionPerformed(ActionEvent e)
 	 			{
 	 				try{
@@ -259,6 +270,9 @@ import java.sql.Statement;
 	 		btnBackToMain.setBounds(655, 527, 157, 23);
 	 		contentPane.add(btnBackToMain);
 	 		btnBackToMain.addActionListener(new ActionListener(){
+				/* (non-Javadoc)
+				 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+				 */
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					dispose();
